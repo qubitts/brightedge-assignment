@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Malformed Page
+<meta name="description" content="This page has malformed HTML">
+</head>
+<body>
+<h1>This is a malformed page</h1>
+<p>The HTML tags are not properly closed.
+<div>
+<p>Some content is here with nested issues.
+<ul>
+<li>Item 1
+<li>Item 2
+<li>Item 3
+</div>
+<p>More content continues here despite the broken structure. This page tests the parser's ability to handle real-world messy HTML that exists on many websites across the internet. Web browsers are very forgiving about bad HTML, and our parser should be too. The content should still be extractable even when the markup is broken or malformed.</p>
+<p>Additional paragraph with enough text to pass the minimum content length validation check for the content validator module.</p>
+</body>
+</html>

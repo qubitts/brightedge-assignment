@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: brightedge-crawler
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: brightedge-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: brightedge-redis
+          type: redis
+          property: connectionString
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CLASSIFICATION_MODE
+        value: nlp
+
+databases:
+  - name: brightedge-db
+    plan: free
+    databaseName: brightedge
+    postgresMajorVersion: "16"
+
+redis:
+  - name: brightedge-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
