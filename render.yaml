@@ -10,10 +10,7 @@ services:
           name: brightedge-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          name: brightedge-redis
-          type: redis
-          property: connectionString
+        sync: false
       - key: LOG_LEVEL
         value: INFO
       - key: CLASSIFICATION_MODE
@@ -24,8 +21,3 @@ databases:
     plan: free
     databaseName: brightedge
     postgresMajorVersion: "16"
-
-redis:
-  - name: brightedge-redis
-    plan: free
-    maxmemoryPolicy: allkeys-lru
