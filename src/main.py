@@ -45,21 +45,9 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Failed to initialize database: {e}")
 
-    # Pre-load NLP models in background
-    logger.info("Pre-loading NLP models...")
-    try:
-        from src.classifier.keyword_extractor import get_keybert_model
-        get_keybert_model()
-    except Exception as e:
-        logger.warning(f"Failed to pre-load KeyBERT: {e}")
-
-    try:
-        from src.classifier.ner_extractor import get_spacy_model
-        get_spacy_model()
-    except Exception as e:
-        logger.warning(f"Failed to pre-load spaCy: {e}")
-
-    logger.info("Startup complete")
+    # NLP models (KeyBERT, spaCy) are lazy-loaded on first request
+    # to avoid blocking startup and exceeding memory limits on free-tier hosts
+    logger.info("Startup complete (NLP models will load on first request)")
     yield
 
     # Shutdown
