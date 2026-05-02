@@ -18,6 +18,6 @@ RUN uv pip install --system --no-cache ".[dev]"
 # Download spaCy model
 RUN python -m spacy download en_core_web_sm
 
-EXPOSE 10000
+EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
